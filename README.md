@@ -1,16 +1,48 @@
 # boraxpr_biometric_example
 
-A new Flutter project.
+This Flutter project showcases the implementation of biometric authentication using local_auth.
 
-## Getting Started
+<div align="center">
+  <img id="myImage" src="giphy.gif" alt="Biometric Authentication Example" />
+</div>
 
-This project is a starting point for a Flutter application.
+### Permission for biometric: If permission is not granted, app will be failed to initialize.
+1. IOS at `project/ios/Runner/Info.plist` directly under "dict" tag.
+   
+```
+<key>NSFaceIDUsageDescription</key>
+<string>Why is my app authenticating using face id?</string>
+```
 
-A few resources to get you started if this is your first Flutter project:
+2. Android at `project/android/app/src/main/AndroidManifest.xml` directly under "manifest" tag.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```<uses-permission android:name="android.permission.USE_BIOMETRIC"/>```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Android Specific 
+
+At `project/android/app/src/main/kotlin/com/example/{ProjectName}/MainActivity.kt` change the default Activity to use FlutterFragmentActivity.
+```
+import io.flutter.embedding.android.FlutterFragmentActivity
+
+class MainActivity: FlutterFragmentActivity() {
+    // ...
+}
+```
+
+### iOS Specific
+
+Xcode build will requires you to select your team. To do this, you need to be on MacOS. Then open `project/ios/Runner.xcworkspace` by using Xcode then edit the build setting.
+
+### Add the local_auth dependency
+
+```
+dependencies:
+  flutter:
+    sdk: flutter
+  local_auth:
+```
+
+### Run
+`flutter pub get`
+
+`flutter run`
